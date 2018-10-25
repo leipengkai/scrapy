@@ -1,0 +1,4 @@
+#LWP-Cookies-2.0
+Set-Cookie3: csrftoken=VgJhOIT8KdDxy5AjBKHZxjgaGcuf4Xwa; path="/"; domain=".instagram.com"; path_spec; domain_dot; secure; expires="2019-10-09 03:37:54Z"; version=0
+Set-Cookie3: mcd=3; path="/"; domain=".instagram.com"; path_spec; domain_dot; secure; expires="2028-10-06 06:18:36Z"; version=0
+Set-Cookie3: mid=W7xIPAALAAFEaO9EM5ZfNFAzPIIu; path="/"; domain=".instagram.com"; path_spec; domain_dot; secure; expires="2028-10-06 06:18:36Z"; version=0

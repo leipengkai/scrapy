@@ -1,0 +1,11 @@
+.idea
+*.pyc
+*.orig
+*.swp
+.DS_Store
+General
+nohup.out
+.ipynb_checkpoints/
+database/mysql/*
+database/redis/*
+database/mongo/*
