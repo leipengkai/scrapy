@@ -4,6 +4,8 @@ from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
 import pymysql
 from twisted.enterprise import adbapi
+from scrapy.conf import settings
+import pymongo
 
 
 # Define your item pipelines here
@@ -90,3 +92,31 @@ class InstagramImagePipeline(ImagesPipeline):
             item['image_path'] = image_path
             return item
 
+
+
+class MongodbPipeline(object):
+    def __init__(self):
+        # 获取setting主机名、端口号和数据库名
+        host = settings['MONGODB_HOST']
+        port = settings['MONGODB_PORT']
+        dbname = settings['MONGODB_DBNAME']
+
+        # pymongo.MongoClient(host, port) 创建MongoDB链接
+        client = pymongo.MongoClient(host=host,port=port,username='root',password='123456')
+
+        # 指向指定的数据库
+        mdb = client[dbname]
+        # 获取数据库里存放数据的表名
+        self.post = mdb[settings['MONGODB_DOCNAME']]
+
+    def process_item(self, item, spider):
+        data = dict(item)
+        url = data.get('url')
+        if 'name' in data:
+            # 向指定的表里添加数据
+            # self.post.insert(data)
+            self.post.find_one_and_update({'url':url},{'$set':{'name':data.get('name')}},upsert=True,)
+        else:
+            self.post.update_one({'url':url},{'$set':
+    {'detail':data.get('detail')}})
+        return item

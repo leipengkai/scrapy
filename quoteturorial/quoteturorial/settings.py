@@ -65,14 +65,14 @@ COOKIES_ENABLED = False
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'quoteturorial.middlewares.RandomUserAgentMiddlware': 543,
-    'quoteturorial.middlewares.ProxyMiddleware': 544,
-    'quoteturorial.middlewares.JSPageMiddleware': 545 ,
+# DOWNLOADER_MIDDLEWARES = {
+#     'quoteturorial.middlewares.RandomUserAgentMiddlware': 543,
+#     'quoteturorial.middlewares.ProxyMiddleware': 544,
+#     'quoteturorial.middlewares.JSPageMiddleware': 545 ,
     # 'quoteturorial.middlewares.RandomProxyMiddleware': 544,
-}
+# }
 
-RANDOM_UA_TYPE = 'random'
+# RANDOM_UA_TYPE = 'random'
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -85,9 +85,19 @@ RANDOM_UA_TYPE = 'random'
 ITEM_PIPELINES = {
     # 'quoteturorial.pipelines.TextPipeline': 300,
     # 'quoteturorial.pipelines.MysqlPipeline': 301,
-    'quoteturorial.pipelines.InstagramImagePipeline': 300,
+    # 'quoteturorial.pipelines.InstagramImagePipeline': 300,
+    'quoteturorial.pipelines.MongodbPipeline': 300,
 
 }
+# MONGODB 主机环回地址127.0.0.1
+MONGODB_HOST = '127.0.0.1'
+# 端口号，默认是27017
+MONGODB_PORT = 27017
+# 设置数据库名称
+MONGODB_DBNAME = 'mituan'
+# 存放本次数据的表名称
+MONGODB_DOCNAME = 'tags'
+
 MYSQL_HOST = "localhost"
 MYSQL_DBNAME = "scrapy"
 MYSQL_USER = "root"

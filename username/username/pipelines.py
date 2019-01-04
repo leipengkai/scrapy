@@ -16,10 +16,11 @@ class UsernamePipeline(object):
         dbname = settings['MONGODB_DBNAME']
 
         # pymongo.MongoClient(host, port) 创建MongoDB链接
-        client = pymongo.MongoClient(host=host,port=port)
+        client = pymongo.MongoClient(host=host,port=port,username='root',password='123456')
 
         # 指向指定的数据库
         mdb = client[dbname]
+        # mdb.authenticate("root", "123456", mechanism='SCRAM-SHA-1')
         # 获取数据库里存放数据的表名
         self.post = mdb[settings['MONGODB_DOCNAME']]
 

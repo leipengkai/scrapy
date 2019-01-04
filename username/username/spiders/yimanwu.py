@@ -20,11 +20,11 @@ class YimanwuSpider(scrapy.Spider):
         for each in namelist:
             name = each.xpath("p/text()").extract()[0]
             print(name)
-            with open(os.path.normpath(os.path.join(os.getcwd(),'username/spiders/scrapyname')) ,'a') as f:
-                f.write(name + '\n')
+            # with open(os.path.normpath(os.path.join(os.getcwd(),'username/spiders/scrapyname')) ,'a') as f:
+            #     f.write(name + '\n')
 
             item['username'] = name
-            # yield item
+            yield item
 
         self.start +=1
         print(self.start)

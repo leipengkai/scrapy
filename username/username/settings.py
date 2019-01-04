@@ -75,7 +75,7 @@ MONGODB_DOCNAME = 'username'
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   # 'username.pipelines.UsernamePipeline': 300,
+   'username.pipelines.UsernamePipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
