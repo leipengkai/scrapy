@@ -29,3 +29,19 @@ class UsernamePipeline(object):
         # 向指定的表里添加数据
         self.post.insert(data)
         return item
+
+class THZPipeline(object):
+    def __init__(self):
+        host = settings['MONGODB_HOST']
+        port = settings['MONGODB_PORT']
+        dbname = settings['MONGODB_DBNAME_THZ']
+
+        client = pymongo.MongoClient(host=host,port=port,username='root',password='123456')
+
+        mdb = client[dbname]
+        self.post = mdb[settings['MONGODB_DOCNAME_THZ']]
+
+    def process_item(self, item, spider):
+        data = dict(item)
+        self.post.insert(data)
+        return item

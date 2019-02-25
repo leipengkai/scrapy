@@ -28,8 +28,10 @@ MONGODB_HOST = '127.0.0.1'
 MONGODB_PORT = 27017
 # 设置数据库名称
 MONGODB_DBNAME = 'yimanwu'
+MONGODB_DBNAME_THZ = 'thz2'
 # 存放本次数据的表名称
 MONGODB_DOCNAME = 'username'
+MONGODB_DOCNAME_THZ = 'thz2'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -74,8 +76,9 @@ MONGODB_DOCNAME = 'username'
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'username.pipelines.UsernamePipeline': 300,
+ITEM_PIPELINES = { 
+   # 'username.pipelines.UsernamePipeline': 300,
+   'username.pipelines.THZPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

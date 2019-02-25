@@ -12,3 +12,7 @@ class UsernameItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     username = scrapy.Field()
+
+class THZItem(scrapy.Item):
+    url = scrapy.Field()
+    name = scrapy.Field()

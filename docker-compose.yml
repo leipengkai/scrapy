@@ -58,6 +58,8 @@ services:
             # (HOST:CONTAINER)
         volumes: #chmod 777 -R redis
             - ./database/redis:/bitnami
+            # - /path/to/redis-persistence:/bitnami/redis/data
+            - ./database/redis.conf:/opt/bitnami/redis/etc/redis.conf # 但可以先在本地创建redis.conf之后,再volumes.同时不是镜像中默认的配置文件
         restart: always
         networks:
           - back-tier
