@@ -29,7 +29,7 @@ CREATE TABLE `proxy_ip` (
 # )
 # 打开数据库连接
 # conn = pymysql.connect(**dbparms)
-conn = pymysql.connect(host='localhost',db='scrapy',user='root',passwd='123456')
+conn = pymysql.connect(host='0.0.0.0',db='test',user='root',passwd='123456')
 
 
 # 使用 cursor() 方法创建一个游标对象 cursor
@@ -37,10 +37,10 @@ cursor = conn.cursor()
 
 
 
-def crawl_ips():
+def crawl_ips(pages):
     #爬取西刺的免费ip代理
     headers = {"User-Agent":"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0"}
-    for i in range(1568):
+    for i in range(pages):
         re = requests.get("http://www.xicidaili.com/nn/{0}".format(i), headers=headers)
 
         selector = Selector(text=re.text)
@@ -130,7 +130,7 @@ class GetIP(object):
 
 
 
-# print (crawl_ips())
 if __name__ == "__main__":
+    # print (crawl_ips(3))
     get_ip = GetIP()
     get_ip.get_random_ip()

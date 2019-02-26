@@ -8,5 +8,5 @@ if __name__ == '__main__':
     # sys.path.append(os.path.dirname(os.path.abspath(__file__))) # pychram调试
     # cmdline.execute('scrapy crawl quotes'.split())
     # cmdline.execute('scrapy crawl google'.split())
-    # cmdline.execute('scrapy crawl instagram'.split())
-    cmdline.execute('scrapy crawl meituan'.split())
+    cmdline.execute('scrapy crawl instagram'.split())
+    # cmdline.execute('scrapy crawl meituan'.split())

@@ -22,6 +22,7 @@ class QuoteItem(scrapy.Item):
 
         return insert_sql, params
 
+        # 要事先创建好表,而Mongo不需要
         # create_table = """CREATE TABLE `quotes` (
         # `id` int(11) NOT NULL AUTO_INCREMENT,
         # `text` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,

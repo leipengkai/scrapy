@@ -65,12 +65,12 @@ COOKIES_ENABLED = False
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
+DOWNLOADER_MIDDLEWARES = {
 #     'quoteturorial.middlewares.RandomUserAgentMiddlware': 543,
-#     'quoteturorial.middlewares.ProxyMiddleware': 544,
+    'quoteturorial.middlewares.ProxyMiddleware': 544,
 #     'quoteturorial.middlewares.JSPageMiddleware': 545 ,
     # 'quoteturorial.middlewares.RandomProxyMiddleware': 544,
-# }
+}
 
 # RANDOM_UA_TYPE = 'random'
 
@@ -85,8 +85,8 @@ COOKIES_ENABLED = False
 ITEM_PIPELINES = {
     # 'quoteturorial.pipelines.TextPipeline': 300,
     # 'quoteturorial.pipelines.MysqlPipeline': 301,
-    # 'quoteturorial.pipelines.InstagramImagePipeline': 300,
-    'quoteturorial.pipelines.MongodbPipeline': 300,
+    'quoteturorial.pipelines.InstagramImagePipeline': 300,
+    # 'quoteturorial.pipelines.MongodbPipeline': 300,
 
 }
 # MONGODB 主机环回地址127.0.0.1

@@ -5,3 +5,4 @@ selenium
 scrapy
 pymysql
 pymongo
+redis
