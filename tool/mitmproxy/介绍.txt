@@ -1,0 +1,49 @@
+# 常见的抓包工具
+# charles、fiddler、wiresharks
+
+# charles
+官网下载：
+https://www.charlesproxy.com/download/
+
+配置证书：
+help-->SSL Proxing-->install charles root certificate -->click certificate -->all allow
+
+设置代理:https://www.jianshu.com/p/68684780c1b0
+
+查询局域网ip：
+linux、mac：ifconfig
+windows：ipconfig
+
+手机连接charles：
+WLAN、连接的无线网的最下方、点击代理、选择手动，填写主机名和端口（8888）
+
+手机端下载https证书：好像用不到
+安装chls.pro/ssl
+
+
+
+# mitmproxy
+
+官网：
+https://mitmproxy.org/
+
+# github
+https://github.com/mitmproxy
+
+# windows安装
+https://github.com/mitmproxy/mitmproxy/releases/tag/v4.0.4
+
+# mac安装
+# brew install mitmproxy
+
+python环境安装包：
+pip install mitmproxy
+
+# 安装证书
+shell中输入mitmdump
+将mitmproxy-ca-cert.pem安装到移动端
+
+# mitmproxy的端口是8080
+
+
+mitmdump -s 文件名.py  = mitmdump + mitmproxy

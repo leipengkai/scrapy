@@ -1,0 +1,68 @@
+CREATE TABLE `stu` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `name` varchar(10) NOT NULL,
+   `birthday` datetime DEFAULT NULL,
+   `gender` bit(1) DEFAULT b'0',
+   `isdelete` bit(1) DEFAULT b'0',
+   `hometown` varchar(30) DEFAULT NULL,
+   `fscore` int,
+    constraint pk_id PRIMARY KEY (`id`) 
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+create table subjects(
+    id int auto_increment primary key not null,
+    title varchar(10) not null);
+
+
+create table scores(
+    id int primary key auto_increment,
+    stuid int,
+    subid int,
+    score decimal(5,2),
+    foreign key(stuid) references stu(id),
+    foreign key(subid) references subjects(id)
+);
+
+
+#####################################
+
+
+CREATE TABLE dept
+       (deptno int(2) not null ,
+    dname VARCHAR(14) ,
+    loc VARCHAR(13),
+    primary key (deptno)
+    );
+
+
+CREATE TABLE emp
+       (empno int(4)  not null ,
+    ename VARCHAR(10),
+    job VARCHAR(9),
+    mgr INT(4),
+    hiredate DATE  DEFAULT NULL,
+    sal DOUBLE(7,2),
+    comm DOUBLE(7,2),
+    deptno int(2) not null,
+    primary key (empno),
+    foreign key(deptno) references dept(deptno)
+    );
+
+CREATE TABLE salgrade
+      ( grade INT,
+    losal INT,
+    hisal INT );
+
+#####################################
+
+
+create table areas(
+    id int primary key,
+    title varchar(50),
+    pid int,
+    foreign key(pid) references areas(id))
+    ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+######################

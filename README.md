@@ -1,16 +1,16 @@
 #### [安装Anaconda](https://www.anaconda.com/)以及对[Anaconde的简单入门](https://www.leipengkai.com/article/28/)
 ```bash
-    # 查看是否成功安装
-    conda --version
-    # 在base环境中安装包
-    pip3 install -U -r requirements.txt
+# 查看是否成功安装
+conda --version
+# 在base环境中安装包
+pip3 install -U -r requirements.txt
 ```
 
 ### [常用的网页分析库](./parse_tool)
 
 ## Scrapy框架
 ![Scrapy框架](https://ws3.sinaimg.cn/large/006tKfTcgy1g0jw3iz9j4j318q0u0anj.jpg)
-- [Scrapy架构概览的名词理解](./scrapy.png)
+- Scrapy架构概览的名词理解
   - **Scrapy Engine**:引擎负责控制数据流在系统中所有组件中流动,并在相应动作发生时触发事件,整个爬虫的调度中心.
 
   - **调度器(Scheduler)**:调度器从引擎接受request并将他们入队,以便之后引擎请求他们时提供给引擎
@@ -46,6 +46,23 @@
 - [Scrapy文档](http://scrapy-chs.readthedocs.io/zh_CN/latest/),[english](https://docs.scrapy.org/en/latest/index.html)
 - [Scrapy命令行工具](#Scrapy命令行):用于管理Scrapy项目的命令行工具
 - [Spiders中的提取数据选择器](./xpath.md)
+- [之前的Scrapy理解图](./scrapy.png)
+
+## 爬虫思路顺序
+新建项目(scrapy startproject xxx):新建一个新的爬虫项目
+明确目标(编写items.py):明确你想要抓取的目标
+存储内容(pipelines.py):设计管道存储爬取内容
+制作爬虫(spiders/xxspider.py):制作爬虫开始爬取网页
+
+## 用到的技术
+- [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/README.md)
+- aiohttp的使用
+- 免费代理ip(元类,redis),和付费代理ip的使用
+- cookies池
+
+## 项目介绍
+- [usernmae项目](./username/README.md):爬取网名,用来创造虚拟用户
+
 
 ### [Spiders](https://scrapy.readthedocs.io/en/latest/topics/spiders.html)
 - 编写爬取网站的规则,来完成爬虫的逻辑,进行网页数据的解析
@@ -62,9 +79,9 @@
 ### [Item Pipeline](https://scrapy.readthedocs.io/en/latest/topics/item-pipeline.html)
 - 当页面被爬虫解析所需的数据存入Item后,将被发送到项目管道(Pipeline),并经过几个特定的次序处理数据,最后存入本地文件或存入数据库.
 - Item Pipeline: 后处理(Post-process),存储爬取的数据,当我们抓取到Item之后,需要进行对它的进一步的处理(指定多个Pipline的先后来层层处理)
-- Pipeline的作用:清理html数据,做确认,查重,存入数据库
+- Pipeline的作用:验证或清理爬取的数据,查重,存入数据库
 - 每个管道组件的类中的方法:
-    - process_item(self, item, spider)
+    - process_item(self, item, spider):必须实现
     - open_spider(self, spider)
     - close_spider(self, spider)
     - from_crawler(cls, crawler)
@@ -84,12 +101,17 @@
 
 ### Scrapy命令行
  -  创建项目.抓取目标网站:http://quotes.toscrape.com/
+
         # scrapy startproject [项目名]
 	    scrapy startproject quotetutorial
 	    cd quotetutorial
  - 创建spider
-        # scrapy genspider + 文件名(爬虫名) + 网址域名
+
+        # 创建Spider模板: scrapy genspider + 文件名(爬虫名) + 网址域名
 	    scrapy genspider quotes quotes.toscrape.com
+        # 创建CrawlSpider模板:它是Spider的子类(派生类)
+        # scrapy genspider -t crawl quotes quotes.toscrape.com
+
 
  - list返回项目所有spider名称
 

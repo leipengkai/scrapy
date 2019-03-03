@@ -6,3 +6,4 @@ scrapy
 pymysql
 pymongo
 redis
+alembic
