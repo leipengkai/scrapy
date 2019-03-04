@@ -1,17 +1,20 @@
-# 元类参考文章
-# https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014319106919344c4ef8b1e04c48778bb45796e0335839000
-
 import json
 import re
 from .utils import get_page
 from pyquery import PyQuery as pq
 
+# 元类参考文章
+# https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014319106919344c4ef8b1e04c48778bb45796e0335839000
 
 class ProxyMetaclass(type):
     def __new__(cls, name, bases, attrs):
-        print(name)  # 输出是Crawler
-        print(bases) # 输出是(<class 'object'>,)
-        print(attrs) # 通过打印attrs，查看字典中的值
+        """
+        cls:当前准备创建的类的对象
+        name:类的名字   Crawler
+        bases:类继承的父类集合 (<class 'object'>,)
+        attrs:类的方法集合
+        输出attrs: {'__module__': '__main__', '__qualname__': 'Crawler', 'get_proxies': <function Crawler.get_proxies at 0x10be21d08>,...}
+        """
         count = 0
         attrs['__CrawlFunc__'] = []   # 给子类添加了一个__CrawlFunc__()方法
         for k, v in attrs.items():

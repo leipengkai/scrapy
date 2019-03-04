@@ -1,22 +1,20 @@
 import redis
 from proxypool.error import PoolEmptyError
-from proxypool.setting import REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_KEY
+from proxypool.setting import REDIS_HOST, REDIS_PORT, REDIS_PASSWORD, REDIS_KEY, REDIS_DB
 from proxypool.setting import MAX_SCORE, MIN_SCORE, INITIAL_SCORE
 from random import choice
 import re
 
-# redis 有序集合的方法
-# http://www.runoob.com/redis/redis-sorted-sets.html
 
 class RedisClient(object):
-    def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD):
+    def __init__(self, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD,db=REDIS_DB):
         """
         初始化
         :param host: Redis 地址
         :param port: Redis 端口
         :param password: Redis密码
         """
-        self.db = redis.StrictRedis(host=host, port=port, password=password, decode_responses=True)
+        self.db = redis.StrictRedis(host=host, port=port, db=db, password=password, decode_responses=True)
     
     def add(self, proxy, score=INITIAL_SCORE):
         """
@@ -29,11 +27,15 @@ class RedisClient(object):
             print('代理不符合规范', proxy, '丢弃')
             return
         if not self.db.zscore(REDIS_KEY, proxy):
+            """
+            查询这个proxy的分数值,如果没有则说明此代理ip还没有增加入库
+            则将此proxy,加入分数并进行缓存
+            """
             return self.db.zadd(REDIS_KEY, score, proxy)
     
     def random(self):
         """
-        随机获取有效代理，首先尝试获取最高分数代理，如果不存在，按照排名获取，否则异常
+        随机获取有效代理,首先尝试获取最高分数代理,如果不存在,按照排名获取,否则异常
         :return: 随机代理
         """
         result = self.db.zrangebyscore(REDIS_KEY, MAX_SCORE, MAX_SCORE)

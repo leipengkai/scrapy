@@ -1,8 +1,13 @@
 # Redis数据库地址
-REDIS_HOST = '127.0.0.1'
+REDIS_HOST = '0.0.0.0'  # 可用
+# 需要注意的是我是用docker启动的redis
+# REDIS_HOST = 'redis'  # 不可用,因为服务之间没有关联
 
 # Redis端口
 REDIS_PORT = 6379
+
+# Reids数据库
+REDIS_DB = 2
 
 # Redis密码，如无填None
 REDIS_PASSWORD = None

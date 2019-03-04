@@ -54,10 +54,10 @@ pip3 install -U -r requirements.txt
 存储内容(pipelines.py):设计管道存储爬取内容
 制作爬虫(spiders/xxspider.py):制作爬虫开始爬取网页
 
-## 用到的技术
+## 用到的技术,(xmind中)加上本地的教程
 - [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/README.md)
-- aiohttp的使用
-- 免费代理ip(元类,redis),和付费代理ip的使用
+- [免费代理ip(元类,redis,aiohttp检测代理ip的可用性)](./tool/free_ip_pool/README.md)
+- 付费代理ip的使用思路
 - cookies池
 
 ## 项目介绍
