@@ -49,19 +49,20 @@ pip3 install -U -r requirements.txt
 - [之前的Scrapy理解图](./scrapy.png)
 
 ## 爬虫思路顺序
-新建项目(scrapy startproject xxx):新建一个新的爬虫项目
-明确目标(编写items.py):明确你想要抓取的目标
-存储内容(pipelines.py):设计管道存储爬取内容
-制作爬虫(spiders/xxspider.py):制作爬虫开始爬取网页
+- 新建项目(scrapy startproject xxx):新建一个新的爬虫项目
+- 明确目标(编写items.py):明确你想要抓取的目标
+- 存储内容(pipelines.py):设计管道存储爬取内容
+- 制作爬虫(spiders/xxspider.py):制作爬虫开始爬取网页
 
 ## 用到的技术,(xmind中)加上本地的教程
-- [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/README.md)
-- [免费代理ip(元类,redis,aiohttp检测代理ip的可用性)](./tool/free_ip_pool/README.md)
+- [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/)
+- 模块功能清楚分明,逻辑结构清晰,可扩展性强
+    - [免费代理ip(元类,redis,aiohttp检测代理ip的可用性)](./tool/free_ip_pool/)
+    - [cookies池登录](./tool/cookiespool/)
 - 付费代理ip的使用思路
-- cookies池
 
 ## 项目介绍
-- [usernmae项目](./username/README.md):爬取网名,用来创造虚拟用户
+- [usernmae项目](./username/):爬取网名,用来创造虚拟用户
 
 
 ### [Spiders](https://scrapy.readthedocs.io/en/latest/topics/spiders.html)

@@ -1,20 +1,21 @@
 import random
 import redis
-from cookiespool.config import *
+from config import *
+# from cookiespool.config import *
 
 # redis 哈希结构
 # http://www.runoob.com/redis/redis-hashes.html
 
 class RedisClient(object):
-    def __init__(self, type, website, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD):
+    def __init__(self, style, website, host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASSWORD,db=REDIS_DB):
         """
         初始化Redis连接
         :param host: 地址
         :param port: 端口
         :param password: 密码
         """
-        self.db = redis.StrictRedis(host=host, port=port, password=password, decode_responses=True)
-        self.type = type
+        self.db = redis.StrictRedis(host=host, port=port, db=db, password=password, decode_responses=True)
+        self.style = style
         self.website = website
 
     def name(self):
@@ -22,7 +23,7 @@ class RedisClient(object):
         获取Hash的名称
         :return: Hash名称
         """
-        return "{type}:{website}".format(type=self.type, website=self.website)
+        return "{style}:{website}".format(style=self.style, website=self.website)
 
     def set(self, username, value):
         """
@@ -80,5 +81,5 @@ class RedisClient(object):
 
 if __name__ == '__main__':
     conn = RedisClient('accounts', 'weibo')
-    result = conn.set('hell2o', 'sss3s')
+    result = conn.set('hell3o', 'sss3s') # 1表示插入成功,如果有重名的则不再插入
     print(result)

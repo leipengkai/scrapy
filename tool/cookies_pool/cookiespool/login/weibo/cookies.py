@@ -1,10 +1,11 @@
 import time
 from io import BytesIO
 from PIL import Image
+from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from os import listdir
 from os.path import abspath, dirname
@@ -23,11 +24,11 @@ class WeiboCookies():
     def open(self):
         """
         打开网页输入用户名密码并点击
-        :return: None
+        :return: none
         """
         self.browser.delete_all_cookies()
         self.browser.get(self.url)
-        username = self.wait.until(EC.presence_of_element_located((By.ID, 'loginName')))
+        username = self.wait.until(EC.presence_of_element_located((By.ID, 'loginName'))) # 区分大小写loginName
         password = self.wait.until(EC.presence_of_element_located((By.ID, 'loginPassword')))
         submit = self.wait.until(EC.element_to_be_clickable((By.ID, 'loginAction')))
         username.send_keys(self.username)
@@ -46,6 +47,16 @@ class WeiboCookies():
         except TimeoutException:
             return False
 
+    def embed_captcha(self):
+        """
+        点击按钮验证(嵌入式验证)
+        :return:
+        """
+        embed_captcha_submit = self.wait.until(EC.element_to_be_clickable((By.ID, 'embed-captcha')))
+        time.sleep(1)
+        embed_captcha_submit.click()
+
+
     def login_successfully(self):
         """
         判断是否登录成功
@@ -53,7 +64,7 @@ class WeiboCookies():
         """
         try:
             return bool(
-                WebDriverWait(self.browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'drop-title'))))
+                WebDriverWait(self.browser, 5).until(EC.presence_of_element_located((By.CLASS_NAME, 'main-wrap'))))
         except TimeoutException:
             return False
 
@@ -63,7 +74,7 @@ class WeiboCookies():
         :return: 验证码位置元组
         """
         try:
-            img = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'patt-shadow')))
+            img = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'geetest_canvas_img')))
         except TimeoutException:
             print('未出现验证码')
             self.open()
@@ -203,17 +214,35 @@ class WeiboCookies():
                 'status': 2,
                 'content': '用户名或密码错误'
             }
+
         # 如果不需要验证码直接登录成功
         if self.login_successfully():
             cookies = self.get_cookies()
             return {
                 'status': 1,
                 'content': cookies
+
             }
-        # 获取验证码图片
+
+        # 点击按钮验证
+        self.embed_captcha()
+
+        # 如果不需要拖图验证
+        if self.login_successfully():
+            cookies = self.get_cookies()
+            return {
+                'status': 1,
+                'content': cookies
+
+            }
+
+
+        # 拖图验证: 获取验证码图片
         image = self.get_image('captcha.png')
         numbers = self.detect_image(image)
         self.move(numbers)
+
+
         if self.login_successfully():
             cookies = self.get_cookies()
             return {
@@ -228,5 +257,5 @@ class WeiboCookies():
 
 
 if __name__ == '__main__':
-    result = WeiboCookies('14773427930', 'x6pybpakq1').main()
+    result = WeiboCookies('username', 'password',webdriver.Chrome()).main()
     print(result)

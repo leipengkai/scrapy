@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 r = redis.Redis(host='127.0.0.1', port=6379)
 
 for d in range(1, 3):  # 采集1到2页
+    '''
+    单独一个爬取前两页可用的西刺代理
+    '''
     scrapeUrl = 'http://www.xicidaili.com/nn/%d/' % d
     req = urllib.request.Request(scrapeUrl)
     req.add_header('User-Agent', 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)')

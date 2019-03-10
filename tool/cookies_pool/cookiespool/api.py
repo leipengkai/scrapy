@@ -1,7 +1,7 @@
 import json
 from flask import Flask, g
-from cookiespool.config import *
-from cookiespool.db import *
+from config import *
+from db import *
 
 __all__ = ['app']
 
@@ -14,7 +14,7 @@ def index():
 
 def get_conn():
     """
-    获取
+    获取所有对应网址的redis_db连接以及RedisClient类中的所有方法
     :return:
     """
     for website in GENERATOR_MAP:
@@ -30,6 +30,7 @@ def random(website):
     """
     获取随机的Cookie, 访问地址如 /weibo/random
     :return: 随机Cookie
+    random 是RedisClient自定义的random方法
     """
     g = get_conn()
     cookies = getattr(g, website + '_cookies').random()

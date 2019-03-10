@@ -131,6 +131,6 @@ class GetIP(object):
 
 
 if __name__ == "__main__":
-    # print (crawl_ips(3))
-    get_ip = GetIP()
-    get_ip.get_random_ip()
+    # print (crawl_ips(3))  # 不做任何的检测动作,爬取所有n页的西刺代理ip,并插入到mysql中
+    get_ip = GetIP()  # 对已经保存在mysql的代理ip做检测处理
+    get_ip.get_random_ip()  # 随机得到一个可用的代理ip(不推荐)

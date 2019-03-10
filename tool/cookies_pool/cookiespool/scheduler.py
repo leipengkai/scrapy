@@ -1,10 +1,10 @@
 import time
 from multiprocessing import Process
 
-from cookiespool.api import app
-from cookiespool.config import *
-from cookiespool.generator import *
-from cookiespool.tester import *
+from api import app
+from config import *
+from generator import *
+from tester import *
 
 
 class Scheduler(object):
@@ -28,6 +28,10 @@ class Scheduler(object):
             print('Cookies生成进程开始运行')
             try:
                 for website, cls in GENERATOR_MAP.items():
+                    '''
+                    通过配置文件,得到CookiesGenerator的子类,并循环子类
+                    为子类初始化时,提供website值,生成对应的生成器
+                    '''
                     generator = eval(cls + '(website="' + website + '")')
                     generator.run()
                     print('Cookies生成完成')
