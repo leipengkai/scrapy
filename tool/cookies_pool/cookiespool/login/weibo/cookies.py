@@ -103,6 +103,7 @@ class WeiboCookies():
         print('验证码位置', top, bottom, left, right)
         screenshot = self.get_screenshot()
         captcha = screenshot.crop((left, top, right, bottom))
+        # captcha.save(name)
         return captcha
 
     def is_pixel_equal(self, image1, image2, x, y):

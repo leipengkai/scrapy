@@ -54,7 +54,9 @@ http://0.0.0.0:5000/weibo/random
 ## 进行扩展
 - 1.在login目录下创建对应的网址目录,然后在新创建的网址目录下创建cookies.py文件(验证登录,获得cookies)
 - 2.编写[generator.py](./cookiespool/generator.py)中,以CookiesGenerator为父类的对应网址的子类,并从上面的cookies.py中得到cookies值
-- 3.将新的写的CookiesGenerator子类[增加配置文件的TESTER_MAP值](./cookiespool/config.py)
+- 3.将新的写的CookiesGenerator子类[增加配置文件的 GENERATOR_MAP值](./cookiespool/config.py)
+- 4.编写[tester.py](./cookiespool/tester.py)中,以ValidTester为父类对应网址的子类,根据username去判断cookies是否有效
+- 5.将新编写的ValidTester的子类,添加到配置文件的[TESTER_MAP值中](./cookiespool/config.py)
 
 
 ## 注意

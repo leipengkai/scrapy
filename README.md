@@ -9,7 +9,9 @@ pip3 install -U -r requirements.txt
 ### [常用的网页分析库](./parse_tool)
 
 ## Scrapy框架
+
 ![Scrapy框架](https://ws3.sinaimg.cn/large/006tKfTcgy1g0jw3iz9j4j318q0u0anj.jpg)
+
 - Scrapy架构概览的名词理解
   - **Scrapy Engine**:引擎负责控制数据流在系统中所有组件中流动,并在相应动作发生时触发事件,整个爬虫的调度中心.
 
@@ -58,7 +60,7 @@ pip3 install -U -r requirements.txt
 - [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/)
 - 模块功能清楚分明,逻辑结构清晰,可扩展性强
     - [免费代理ip(元类,redis,aiohttp检测代理ip的可用性)](./tool/free_ip_pool/)
-    - [cookies池登录](./tool/cookiespool/)
+    - [cookies池登录](./tool/cookies_pool/)
 - 付费代理ip的使用思路
 
 ## 项目介绍
@@ -161,3 +163,5 @@ pip3 install -U -r requirements.txt
         response.xpath("//a[contains(@href,'image')]/text()")
         response.xpath("//a[contains(@href,'image')]/text()").re('Name:\s*(.*)')
         response.xpath('//*[@class="even"]')
+
+当在一个项目中,有多个爬虫时,要注释掉其它的ITEM_PIPELINES,其它setting.py中的内容好像也要做点改变
