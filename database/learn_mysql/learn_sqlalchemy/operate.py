@@ -7,8 +7,8 @@ from  models import *
 
 
 # 创建一个带连接池的引擎 (初始化数据库连接):
-# engine = create_engine('mysql+pymysql://root:123456@0.0.0.0/test?charset=utf8mb4',echo=True)
-engine = create_engine('mysql+pymysql://root:123456@0.0.0.0/test?charset=utf8mb4')
+# engine = create_engine('mysql+pymysql://root:123456@0.0.0.0/scrapy?charset=utf8mb4',echo=True)
+engine = create_engine('mysql+pymysql://root:123456@0.0.0.0/scrapy?charset=utf8mb4')
 
 # 创建DBSession类型
 db_pool = sessionmaker(bind=engine) # 负责执行内存中的对象和数据库表之间的同步工作

@@ -11,18 +11,33 @@ class InstagramSpider(scrapy.Spider):
     name = 'instagram'
     allowed_domains = ['www.instagram.com']
     start_urls = ['https://www.instagram.com/explore/tags/nois7/']
-    #
+
+    # 共用一个browser,不用每次都启动一个新browser
     # def __init__(self):
-    #     self.browser = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+    #     self.browser = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")  
     #     super(InstagramSpider, self).__init__()
     #     dispatcher.connect(self.spider_closed, signals.spider_closed)
     #
     # def spider_closed(self, spider):
-    #     #当爬虫退出的时候关闭chrome
+    #     # 当爬虫退出的时候关闭chrome
     #     print ("spider closed")
     #     self.browser.quit()
 
+    # 数据收集(Stats Collection)
+    #收集所有404的url以及404页面数
+    handle_httpstatus_list = [404]
+    def __init__(self, **kwargs):
+        self.fail_urls = []
+        dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
+
+    def handle_spider_closed(self, spider, reason):
+        self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
+
     def parse(self, response):
+        if response.status == 404:
+            self.fail_urls.append(response.url)
+            self.crawler.stats.inc_value("failed_url")
+
         # time.sleep(3)
         # for i in range(2):
         #     self.browser.execute_script(

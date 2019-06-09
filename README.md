@@ -57,7 +57,7 @@ pip3 install -U -r requirements.txt
 - 制作爬虫(spiders/xxspider.py):制作爬虫开始爬取网页
 
 ## 用到的技术,(xmind中)加上本地的教程
-- [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/)
+- [mysql数据库以及ORM:SQLAlchemy的使用](./database/learn_mysql/README.md)
 - 模块功能清楚分明,逻辑结构清晰,可扩展性强
     - [免费代理ip(元类,redis,aiohttp检测代理ip的可用性)](./tool/free_ip_pool/)
     - [cookies池登录](./tool/cookies_pool/)
@@ -154,7 +154,7 @@ pip3 install -U -r requirements.txt
         response.xpath('//a/text()')
         response.xpath('//a/@href')
         response.xpath('//a[contains(@href, "image")]/text()').re(r'Name:\s*(.*)')
- - scrapy 选择器(Selectors): 使用XPath提取网页的数据
+ - scrapy 选择器(Selectors): [使用XPath提取网页的数据](./xpath.md)
 
         proxychains4  scrapy shell http://doc.scrapy.org/en/latest/_static/selectors-sample1.html
         response.xpath("//a[contains(@href,'image')]")
@@ -165,3 +165,6 @@ pip3 install -U -r requirements.txt
         response.xpath('//*[@class="even"]')
 
 当在一个项目中,有多个爬虫时,要注释掉其它的ITEM_PIPELINES,其它setting.py中的内容好像也要做点改变
+或者使用spider.name在对应的item_pipelines或download中间件做下判断,如果是此爬虫则执行.
+
+为不同的spider设置不同的settings值:在spider重写类变量custom_settings={"":}

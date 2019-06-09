@@ -11,7 +11,7 @@ docker-compose up
 docker exec -it scrapy_mysql_1 bash
 # 连接mysql数据库
 mysql -h0.0.0.0 -uroot -p123456
-CREATE DATABASE `test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE `scrapy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 - 在使用.sql备份文件,导入备份数据之前创建(mongo没有数据库也可以导入备份数据)
 - 在mysql创建表
@@ -20,11 +20,11 @@ CREATE DATABASE `test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
 ## 创建数据
 ### 使用mysql图形界面或者使用myql命令导入数据
-如果是使用docker启动mysql,则需要将test.sql放入database/mysql/的目录下
+如果是使用docker启动mysql,则需要将learn_sqlalchemy/scrapy.sql放入database/mysql/的目录下
 ```bash
 docker exec -it scrapy_mysql_1 bash
 cd /var/lib/mysql
-mysql -h0.0.0.0 -uroot -p123456 test < test.sql
+mysql -h0.0.0.0 -uroot -p123456 scrapy < scrapy.sql
 ```
 
 ### 或者使用手动创建表以及数据

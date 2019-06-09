@@ -114,7 +114,7 @@ class JSPageMiddleware(object):
     def process_request(self, request, spider):
         if spider.name == "instagram1":
             url = request.url
-            spider.browser.get(url)
+            spider.browser.get(url) # 这里可以自己写成异步的方式去请求(scrapy download)
             import time
             # time.sleep(3)
             # for i in range(2):

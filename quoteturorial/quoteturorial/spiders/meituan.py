@@ -29,6 +29,11 @@ class MeituanSpider(scrapy.Spider):
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument("user-agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 \
             (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36'")
+
+        # 设置chromedriver不加载图片
+        # prefs = {"profile.managed_default_content_settings.images":2}
+        # chrome_options.add_experimental_option("prefs", prefs)
+
         browser = webdriver.Chrome(chrome_options=chrome_options,executable_path='/usr/local/bin/chromedriver')
         self.driver = browser
         print("spider init")

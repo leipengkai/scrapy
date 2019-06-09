@@ -66,3 +66,28 @@ create table areas(
 
 
 ######################
+
+
+CREATE TABLE `message_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `target` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verification_code` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `routing_key` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `template_code` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  `create_time` datetime DEFAULT NULL,
+  `platform` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(16) COLLATE utf8mb4_unicode_ci DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE `message_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `routing_key` varchar(256) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `routing_key` (`routing_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+######################

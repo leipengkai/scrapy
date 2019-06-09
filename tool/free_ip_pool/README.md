@@ -35,5 +35,8 @@
 python3 run.py
 ```
 
-
+## 代理的不同匿名类型
+- 低级别(Transparent Proxy):服务器可以知道你在使用代理,且知道你的真实IP
+- 中级别(Anonymous Proxy):服务器可以知道你在使用代理,但无法知道你的真实IP
+- 高级别(Highly Anonymous Proxy):服务器无法知道你在使用代理
 
