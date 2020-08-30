@@ -1,4 +1,6 @@
 ```bash
+update  inner join (select yy from b) c on a.id =c.id set a.xx = c.yy
+
 # 查询每个月倒数第 3 天入职的员工的信息
 select * from emp where hiredate = last_day(hiredate)-2;
 
@@ -11,7 +13,7 @@ select deptno ,avg(mgr) from emp group by deptno having avg(mgr) > 7800;
 # 查询工资最低的员工信息:ename, mgr
 select ename,mgr from emp where mgr = (select min(mgr) from emp);
 
-# 查询第3高的工资 n-1 distinct:去重
+# 查询第3高的工资: 从第 N 条记录开始(n-1), 返回 M 条记录. distinct:去重. desc倒序(大到小),默认是正序
 SELECT distinct(mgr) from emp ORDER BY mgr DESC LIMIT 2,1;
 
 # 查询平均工资最低的部门信息: 子查询:单列、from、orderby等都可以进行子查询
@@ -45,5 +47,21 @@ select e.ename,e.mgr,e.deptno,d.avgmgr
 	from emp as e,(select avg(mgr) as avgmgr ,deptno from emp group by deptno) as d 
 		where e.mgr>d.avgmgr and e.deptno=d.deptno;
 
+
+# join 的理解
+select stu.name,scores.score from stu
+    left join scores on scores.stuid=stu.id;
+
+select stu.name,scores.score from stu
+    inner join scores on scores.stuid=stu.id;
+
+
+select stu.name,subjects.title,scores.score
+    from scores
+    inner join stu on scores.stuid=stu.id
+    inner join subjects on scores.subid=subjects.id;
+
+select stu.name,scores.score from stu
+    right join scores on scores.stuid=stu.id;
 
 ```

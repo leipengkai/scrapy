@@ -1,6 +1,22 @@
 version: '2'
 
 services:
+
+    mq:
+        image: "rabbitmq:3-management"
+        hostname: "mq"
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+            RABBITMQ_DEFAULT_USER: "rabbitmq"
+            RABBITMQ_DEFAULT_PASS: "rabbitmq"
+            RABBITMQ_DEFAULT_VHOST: "/"
+        ports:
+        - "15677:15672"
+        - "5677:5672"
+        labels:
+            NAME: "scrapy_mq"
+        networks:
+          - back-tier
     mysql:
         #image: mysql
         image: mysql:5.7
@@ -18,7 +34,7 @@ services:
             - MYSQL_ROOT_HOST=%
 
         ports:
-            - '3306:3306'
+            - '3307:3306'
         volumes:
           - './database/mysql:/var/lib/mysql'
           - './femn.conf:/etc/mysql/mysql.conf.d/femn.cnf'
@@ -54,7 +70,7 @@ services:
             - ALLOW_EMPTY_PASSWORD=yes
 #            - REDIS_PASSWORD=admin123
         ports:
-            - '6379:6379'
+            - '6307:6379'
             # (HOST:CONTAINER)
         volumes: #chmod 777 -R redis
             - ./database/redis:/bitnami

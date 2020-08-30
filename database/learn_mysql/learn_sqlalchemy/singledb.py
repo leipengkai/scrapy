@@ -11,7 +11,7 @@ from sqlalchemy.ext.declarative import declarative_base
 MYSQL_DB = "scrapy"
 MYSQL_HOST = "0.0.0.0"
 MYSQL_PAWD = "123456"
-MYSQL_PORT = "3306"
+MYSQL_PORT = "3307"
 MYSQL_USER = "root"
 
 Base = declarative_base()
@@ -108,9 +108,9 @@ class MysqlClient():
 
 if __name__ == '__main__':
     client = MysqlClient()
-    client.create_table()
+    # client.create_table()
 
     # client.test_add_log()
-    # client.test_add_template()
+    client.test_add_template()
 
     # client.test_get_template()
